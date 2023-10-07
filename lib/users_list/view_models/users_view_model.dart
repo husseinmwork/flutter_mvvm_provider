@@ -7,11 +7,15 @@ import 'package:flutter_mvvm_provider/users_list/repo/user_services.dart';
 class UsersViewModel extends ChangeNotifier {
   bool _loading = false;
   List<UserModel> _usersListModel = [];
-  late UserError _userError;
+  UserError? _userError;
 
   bool get loading => _loading;
   List<UserModel> get usersListModel => _usersListModel;
-  UserError get userError => _userError;
+  UserError? get userError => _userError;
+
+  UsersViewModel() {
+    getUsers();
+  }
 
   setLoading(bool loading) async {
     _loading = loading;

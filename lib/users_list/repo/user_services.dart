@@ -18,6 +18,8 @@ class UserServices {
     } on HttpException {
       return Failure(code: noInternet, errorRespons: 'No Internet');
     } catch (e) {
+      print("object $e");
+
       return Failure(code: unknownError, errorRespons: 'Unknown Error');
     }
   }
