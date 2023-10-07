@@ -6,7 +6,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserServices().getUser();
+    UserServices.getUser();
     return Scaffold(
       appBar: AppBar(),
       body: Container(),
