@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_provider/home_screen.dart';
+import 'package:flutter_mvvm_provider/users_list/views/home_screen.dart';
 import 'package:flutter_mvvm_provider/users_list/view_models/users_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'MVVM',
         theme: ThemeData(
           primaryColor: Colors.blue,
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: const HomeScreen(),

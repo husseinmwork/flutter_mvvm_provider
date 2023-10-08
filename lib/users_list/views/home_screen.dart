@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_provider/components/app_loading.dart';
+import 'package:flutter_mvvm_provider/components/user_list_row.dart';
 import 'package:flutter_mvvm_provider/users_list/models/users_list_model.dart';
 import 'package:flutter_mvvm_provider/users_list/view_models/users_view_model.dart';
+import 'package:flutter_mvvm_provider/utils/navigation_utils.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,8 +13,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     UsersViewModel usersViewModel = context.watch<UsersViewModel>();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Users"),
+        centerTitle: true,
+      ),
       body: Container(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             _ui(usersViewModel),
@@ -23,35 +30,24 @@ class HomeScreen extends StatelessWidget {
 
   _ui(UsersViewModel usersViewModel) {
     if (usersViewModel.loading) {
-      return Container();
+      return const AppLoading();
     }
     if (usersViewModel.userError != null) {
-      return Container(
-        child: Text("Sdfdsfffffffffffffffff"),
-      );
+      return Container();
     }
     return Expanded(
       child: ListView.separated(
         itemBuilder: (context, index) {
           UserModel userModel = usersViewModel.usersListModel[index];
-          return Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  userModel.name.toString(),
-                  style: TextStyle(fontSize: 20, color: Colors.red),
-                ),
-                Text(
-                  userModel.email.toString(),
-                  style: TextStyle(fontSize: 20, color: Colors.red),
-                ),
-              ],
-            ),
+          return UserListRow(
+            userModel: userModel,
+            onTap: () async {
+              usersViewModel.setSelectedUser(userModel);
+              openUserDetials(context);
+            },
           );
         },
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => const Divider(),
         itemCount: usersViewModel.usersListModel.length,
       ),
     );

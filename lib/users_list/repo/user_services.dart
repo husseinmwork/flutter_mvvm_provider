@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter_mvvm_provider/urils/constant.dart';
+import 'package:flutter_mvvm_provider/utils/constant.dart';
 import 'package:flutter_mvvm_provider/users_list/models/users_list_model.dart';
 import 'package:flutter_mvvm_provider/users_list/repo/api_status.dart';
 import 'package:http/http.dart' as http;
@@ -18,8 +18,6 @@ class UserServices {
     } on HttpException {
       return Failure(code: noInternet, errorRespons: 'No Internet');
     } catch (e) {
-      print("object $e");
-
       return Failure(code: unknownError, errorRespons: 'Unknown Error');
     }
   }
