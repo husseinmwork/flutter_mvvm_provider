@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_provider/components/app_error.dart';
 import 'package:flutter_mvvm_provider/components/app_loading.dart';
 import 'package:flutter_mvvm_provider/components/user_list_row.dart';
 import 'package:flutter_mvvm_provider/users_list/models/users_list_model.dart';
@@ -16,6 +17,14 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Users"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              openAddUser(context);
+            },
+            icon: const Icon(Icons.add),
+          )
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
@@ -33,7 +42,9 @@ class HomeScreen extends StatelessWidget {
       return const AppLoading();
     }
     if (usersViewModel.userError != null) {
-      return Container();
+      return AppError(
+        errorTxt: usersViewModel.userError!.message.toString(),
+      );
     }
     return Expanded(
       child: ListView.separated(

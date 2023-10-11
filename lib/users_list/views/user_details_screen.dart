@@ -17,11 +17,13 @@ class UserDetailsScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppTitle(text: usersViewModel.selectedUser!.name.toString()),
             Text(
               usersViewModel.selectedUser!.email.toString(),
-              style: const TextStyle(fontSize: 20, color: Colors.red),
+              style: const TextStyle(fontSize: 20, color: Colors.grey),
             ),
           ],
         ),
